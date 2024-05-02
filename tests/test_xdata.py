@@ -92,6 +92,53 @@ XData XML [ MimeType = text/xml ]
     assert sel.text == '\n<?xml version=\'1.0\' encoding=\'UTF-8\'?><root attrib="<y>">\n}\n</root>\n', 'Data has correct value'
 
 
+def test_xml_cdata():
+    """Tests that XML is wrapped in CDATA"""
+    
+    root = etree.Element("dummy")
+    udl = """
+XData XML
+{
+<root>Something</root>
+}
+""".lstrip()
+    stream = StringIO(udl)
+    line = get_line(stream)
+    
+    handle_xdata(root, stream, line, None)
+    
+    assert len(root), 'XData added'
+    assert (data := root[0].find('Data')) is not None, 'Data element present'
+    txt = etree.tostring(data).decode()
+    assert txt == '<Data><![CDATA[<root>Something</root>\n]]></Data>\n', "Data wrapped in CDATA block"
+
+
+def test_xml_embedded_cdata():
+    """Tests handling of 'embedded' CDATA"""
+    
+    # lxml does not support CDATA with 'escaped' CDATA blocks within.
+    # Make sure the XML in the XData block is escaped by using entity
+    # references instead. This is not how IRIS does it, so it will show
+    # up in a diff.
+    
+    root = etree.Element("dummy")
+    udl = """
+XData XML
+{
+<root><![CDATA[Some&thing]]></root>
+}
+""".lstrip()
+    stream = StringIO(udl)
+    line = get_line(stream)
+    
+    handle_xdata(root, stream, line, None)
+    
+    assert len(root), 'XData added'
+    assert (data := root[0].find('Data')) is not None, 'Data element present'
+    txt = etree.tostring(data).decode()
+    assert txt.startswith('<Data>&lt;'), "No CDATA outer wrapper"
+
+
 def test_doc():
     """Test that documentation is added"""
     

@@ -48,8 +48,8 @@ def handle_xdata(cls:etree._Element, stream:StringIO, line:str, doc:str|None):
         if '\n' in impl:
             impl = '\n' + impl
         impl = impl + '\n'
-        # if not ']]>' in impl:
-        #     impl = CDATA(impl)
+        if not ']]>' in impl:
+            impl = CDATA(impl)
         add_el(xdata, 'Data', impl)
 
 
