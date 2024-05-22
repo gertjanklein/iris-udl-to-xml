@@ -1,8 +1,6 @@
 import re
 from io import StringIO
 
-from io import StringIO
-
 from lxml import etree
 
 from udl2xml.util import add_el, extract, read_until
