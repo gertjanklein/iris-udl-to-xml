@@ -1,5 +1,7 @@
 # IRIS XML to UDL
 
+![Tests](https://github.com/gertjanklein/iris-udl-to-xml/actions/workflows/test-matrix.yml/badge.svg)
+
 An attempt at converting InterSystems IRIS source code in UDL format to
 the XML export format. The UDL format is easier to read and is what is
 shown and edited in Studio and VS Code. The XML export format, however,
