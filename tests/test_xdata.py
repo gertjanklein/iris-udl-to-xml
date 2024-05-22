@@ -116,10 +116,8 @@ XData XML
 def test_xml_embedded_cdata():
     """Tests handling of 'embedded' CDATA"""
     
-    # lxml does not support CDATA with 'escaped' CDATA blocks within.
-    # Make sure the XML in the XData block is escaped by using entity
-    # references instead. This is not how IRIS does it, so it will show
-    # up in a diff.
+    # lxml does not support CDATA with 'escaped' CDATA blocks within. We
+    # use a patched version that allows (and properly escapes) this.
     
     root = etree.Element("dummy")
     udl = """
@@ -136,7 +134,7 @@ XData XML
     assert len(root), 'XData added'
     assert (data := root[0].find('Data')) is not None, 'Data element present'
     txt = etree.tostring(data).decode()
-    assert txt.startswith('<Data>&lt;'), "No CDATA outer wrapper"
+    assert txt == '<Data><![CDATA[<root><![CDATA[Some&thing]]]]><![CDATA[></root>\n]]></Data>\n', "Embedded CDATA escaped"
 
 
 def test_doc():

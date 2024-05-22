@@ -79,6 +79,51 @@ def test_default():
     assert sel.text == 'abc', 'Default has correct value'
 
 
+def test_default_amp():
+    """Test escaping of ampersand"""
+    
+    root = etree.Element("dummy")
+    udl = 'Parameter a = "&";'
+    stream = StringIO(udl)
+    line = get_line(stream)
+    
+    handle_parameter(root, stream, line, None)
+    
+    assert (sel := root.xpath('//Default')), 'Default element present'
+    txt = etree.tostring(sel[0]).decode()
+    assert txt == '<Default><![CDATA[&]]></Default>\n', "Ampersand escaped with CDATA"
+
+
+def test_default_lt():
+    """Test escaping of '<'"""
+    
+    root = etree.Element("dummy")
+    udl = 'Parameter a = "<";'
+    stream = StringIO(udl)
+    line = get_line(stream)
+    
+    handle_parameter(root, stream, line, None)
+    
+    assert (sel := root.xpath('//Default')), 'Default element present'
+    txt = etree.tostring(sel[0]).decode()
+    assert txt == '<Default><![CDATA[<]]></Default>\n', "Less-than escaped with CDATA"
+
+
+def test_default_gt():
+    """Test escaping of '>'"""
+    
+    root = etree.Element("dummy")
+    udl = 'Parameter a = ">";'
+    stream = StringIO(udl)
+    line = get_line(stream)
+    
+    handle_parameter(root, stream, line, None)
+    
+    assert (sel := root.xpath('//Default')), 'Default element present'
+    txt = etree.tostring(sel[0]).decode()
+    assert txt == '<Default><![CDATA[>]]></Default>\n', "Greater-than escaped with CDATA"
+
+
 def test_default_expr():
     """Test parameter value expression correctly handled"""
     

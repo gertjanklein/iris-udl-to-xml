@@ -23,24 +23,6 @@ XData a
     assert xds.endswith(']]></Data>\n'), "Content ends with CDATA wrapper"
 
 
-def test_embedded_cdata():
-    """Tests no CDATA wrapper if data already has one"""
-    
-    udl = """
-XData a
-{
-<root><![CDATA[Something in the way...]]></root>
-}
-""".lstrip()
-    
-    xd = call_handler(udl)
-    xds = etree.tostring(xd, encoding='UTF-8').decode()
-    assert not xds.startswith('<Data><![CDATA['), "Content does not start with CDATA wrapper"
-    assert not xds.endswith(']]></Data>\n'), "Content does not end with CDATA wrapper"
-    assert '&lt;![CDATA[' in xds, "Contents contains escaped CDATA section start"
-    assert ']]&gt;' in xds, "Contents contains escaped CDATA section end"
-
-
 def test_multiline_comment_inline():
     """Test multiline comment ending on the same line"""
     
