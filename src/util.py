@@ -20,7 +20,10 @@ def add_el(to:etree._Element, name:str, text:str|None=None, tailcount:int=1, att
     
     el = etree.SubElement(to, name)
     if text is not None:
-        el.text = text
+        if isinstance(text, str):
+            el.text = wrap(text)
+        else:
+            el.text = text
     el.tail = '\n' * tailcount
     for n, v in attr.items():
         el.attrib[n] = v
@@ -35,6 +38,14 @@ def add_comment(cls, data):
     el.text = '\n'
     el.tail = '\n\n'
     el = add_el(el, 'Content', CDATA(data))
+
+
+def wrap(data:str):
+    """Wraps data in a CDATA block, but only if needed"""
+    
+    if any(char in data for char in ('&', '<', '>')):
+        return CDATA(data)
+    return data
 
 
 def read_until(stream:StringIO, line:str, terminator:str) -> str:
