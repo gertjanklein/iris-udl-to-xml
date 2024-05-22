@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from implementation import get_implementation
-from util import get_line
-from xdata import handle_xdata
+from udl2xml.implementation import get_implementation
+from udl2xml.util import get_line
+from udl2xml.xdata import handle_xdata
 
 
 def test_cdata():

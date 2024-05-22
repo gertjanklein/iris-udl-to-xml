@@ -1,4 +1,4 @@
-from split import split_nv
+from udl2xml.split import split_nv
 
 
 def test_basic():

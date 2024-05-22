@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from util import get_line
-from index import handle_index
+from udl2xml.main import convert
+from udl2xml.util import get_line
+from udl2xml.index import handle_index
 
 
 # Index TestIdx On (a, b, "quo_ted") [ Data = (b, a), SqlName = SqlIndex, Type = index ];

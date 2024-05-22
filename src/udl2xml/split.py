@@ -1,7 +1,7 @@
 from typing import Generator
 import re
 
-from util import unquote, get_quoted_string, extract
+from udl2xml.util import unquote, get_quoted_string, extract
 
 
 """

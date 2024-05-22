@@ -1,4 +1,4 @@
-from main import convert
+from udl2xml.main import convert
 
 
 def test_outside_bmp():

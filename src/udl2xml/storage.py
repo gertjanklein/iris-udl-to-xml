@@ -3,7 +3,7 @@ from io import StringIO
 
 from lxml import etree
 
-from util import add_el, read_until, get_line
+from udl2xml.util import add_el, read_until, get_line
 
 
 def handle_storage(cls:etree._Element, stream:StringIO, line:str, doc:str|None):

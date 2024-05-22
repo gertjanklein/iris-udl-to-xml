@@ -1,7 +1,7 @@
 import re
 from io import StringIO
 
-from util import get_line
+from udl2xml.util import get_line
 
 
 """

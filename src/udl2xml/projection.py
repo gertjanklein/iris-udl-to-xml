@@ -3,8 +3,8 @@ from io import StringIO
 
 from lxml import etree
 
-from util import add_el, extract, read_until
-from split import split_nv
+from udl2xml.util import add_el, extract, read_until
+from udl2xml.split import split_nv
 
 
 def handle_projection(cls:etree._Element, stream:StringIO, line:str, doc:str|None):

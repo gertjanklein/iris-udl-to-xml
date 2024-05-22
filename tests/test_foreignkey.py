@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from util import get_line
-from foreignkey import handle_foreignkey
+from udl2xml.main import convert
+from udl2xml.util import get_line
+from udl2xml.foreignkey import handle_foreignkey
 
 
 def test_no_index():

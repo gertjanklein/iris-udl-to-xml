@@ -1,6 +1,6 @@
 import pytest
 
-from util import extract, get_quoted_string
+from udl2xml.util import extract, get_quoted_string
 
 
 def test_extract_isfull():

@@ -1,4 +1,4 @@
-from main import determine_type
+from udl2xml.main import determine_type
 
 UDL_CLS = """
 /* Copyright */

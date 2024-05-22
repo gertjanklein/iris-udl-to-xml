@@ -3,9 +3,9 @@ from io import StringIO
 
 from lxml import etree
 
-from util import add_el, extract, get_line, unquote, read_until
-from split import split_nv
-from method import parse_parameters
+from udl2xml.util import add_el, extract, get_line, unquote, read_until
+from udl2xml.split import split_nv
+from udl2xml.method import parse_parameters
 
 
 def handle_query(cls:etree._Element, stream:StringIO, line:str, doc:str|None):

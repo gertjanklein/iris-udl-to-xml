@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from util import get_line
-from xdata import handle_xdata
+from udl2xml.main import convert
+from udl2xml.util import get_line
+from udl2xml.xdata import handle_xdata
 
 
 def test_type_text():

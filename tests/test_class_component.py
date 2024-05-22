@@ -1,6 +1,6 @@
 from lxml import etree
 
-from main import convert
+from udl2xml.main import convert
 
 """
 Tests statements inside a class definition that are not tested

@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from util import get_line
-from storage import handle_storage
+from udl2xml.main import convert
+from udl2xml.util import get_line
+from udl2xml.storage import handle_storage
 
 
 def test_empty_serial():

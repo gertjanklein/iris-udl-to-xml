@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from method import parse_parameters, handle_method
-from util import get_line
+from udl2xml.main import convert
+from udl2xml.method import parse_parameters, handle_method
+from udl2xml.util import get_line
 
 
 UDL = """

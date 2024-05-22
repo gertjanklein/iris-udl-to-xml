@@ -2,8 +2,8 @@ import sys, io
 import re
 import argparse
 
-from cvt_routine import convert_rtn
-from cvt_class import convert_cls
+from udl2xml.cvt_routine import convert_rtn
+from udl2xml.cvt_class import convert_cls
 
 
 def main():

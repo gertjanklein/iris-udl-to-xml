@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from property import handle_property
-from util import get_line
+from udl2xml.main import convert
+from udl2xml.property import handle_property
+from udl2xml.util import get_line
 
 
 def test_bare():

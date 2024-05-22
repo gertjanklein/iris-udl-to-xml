@@ -4,9 +4,9 @@ from io import StringIO
 from lxml import etree
 from lxml.etree import CDATA
 
-from util import add_el, extract, read_until, unquote
-from split import split_nv
-from implementation import get_implementation
+from udl2xml.util import add_el, extract, read_until, unquote
+from udl2xml.split import split_nv
+from udl2xml.implementation import get_implementation
 
 
 def handle_xdata(cls:etree._Element, stream:StringIO, line:str, doc:str|None):

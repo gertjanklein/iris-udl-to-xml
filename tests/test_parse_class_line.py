@@ -1,4 +1,4 @@
-from cvt_class import parse_class_line
+from udl2xml.cvt_class import parse_class_line
 
 
 def test_bare():

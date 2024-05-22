@@ -2,9 +2,9 @@ from io import StringIO
 
 from lxml import etree
 
-from main import convert
-from util import get_line
-from projection import handle_projection
+from udl2xml.main import convert
+from udl2xml.util import get_line
+from udl2xml.projection import handle_projection
 
 
 def test_basic():

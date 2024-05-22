@@ -3,19 +3,19 @@ from io import StringIO
 
 from lxml import etree
 
-from split import split_nv
-from util import add_comment, add_el, get_line, startswithi, extract, get_word, unquote
+from udl2xml.split import split_nv
+from udl2xml.util import add_comment, add_el, get_line, startswithi, extract, get_word, unquote
 
-from foreignkey import handle_foreignkey
-from index import handle_index
-from method import handle_method
-from parameter import handle_parameter
-from projection import handle_projection
-from property import handle_property
-from query import handle_query
-from storage import handle_storage
-from trigger import handle_trigger
-from xdata import handle_xdata
+from udl2xml.foreignkey import handle_foreignkey
+from udl2xml.index import handle_index
+from udl2xml.method import handle_method
+from udl2xml.parameter import handle_parameter
+from udl2xml.projection import handle_projection
+from udl2xml.property import handle_property
+from udl2xml.query import handle_query
+from udl2xml.storage import handle_storage
+from udl2xml.trigger import handle_trigger
+from udl2xml.xdata import handle_xdata
 
 
 def convert_cls(udl:str, name:str) -> str:
