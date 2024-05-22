@@ -1,9 +1,11 @@
 from io import StringIO
 
+import pytest
+
 from lxml import etree
 
 from udl2xml.main import convert
-from udl2xml.util import get_line
+from udl2xml.util import get_line, has_split_feature
 from udl2xml.xdata import handle_xdata
 
 
@@ -118,6 +120,8 @@ def test_xml_embedded_cdata():
     
     # lxml does not support CDATA with 'escaped' CDATA blocks within. We
     # use a patched version that allows (and properly escapes) this.
+    if not has_split_feature():
+        pytest.skip("This lxml version does not support splitting CDATA sections")
     
     root = etree.Element("dummy")
     udl = """

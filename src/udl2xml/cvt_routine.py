@@ -1,7 +1,7 @@
 import re
 
 from lxml import etree
-from lxml.etree import CDATA
+from udl2xml.util import CDATA
 
 
 def convert_rtn(udl:str, name:str, type:str) -> str:

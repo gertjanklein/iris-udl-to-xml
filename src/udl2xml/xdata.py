@@ -2,7 +2,7 @@ import re
 from io import StringIO
 
 from lxml import etree
-from lxml.etree import CDATA
+from udl2xml.util import CDATA
 
 from udl2xml.util import add_el, extract, read_until, unquote
 from udl2xml.split import split_nv

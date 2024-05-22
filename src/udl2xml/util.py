@@ -1,7 +1,27 @@
 from io import StringIO
 
 from lxml import etree
-from lxml.etree import CDATA
+
+
+def has_split_feature():
+    """Returns whether lxml supports splitting CDATA sections"""
+    
+    if not hasattr(has_split_feature, 'result'):
+        try:
+            etree.CDATA(']]>')
+            has_split_feature.result = True
+        except ValueError:
+            has_split_feature.result = False
+    
+    return has_split_feature.result
+
+
+def CDATA(data: str):
+    """Safeguards CDATA"""
+    
+    if has_split_feature() or (not ']]>' in data):
+        return etree.CDATA(data)
+    return data
 
 
 def get_line(stream:StringIO) -> str:
