@@ -4,9 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "iris-udl-to-xml"
-version = "0.1"
 authors = [{name = "Gertjan Klein", email = "gklein@parvos.nl"}]
-description = "Converts IRIS UDL input to XML export format."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
@@ -21,6 +19,7 @@ classifiers = [
 dependencies = [
     "lxml >=5.2.2"
 ]
+dynamic = ["version", "description"]
 
 [project.urls]
 Homepage = "https://github.com/gertjanklein/iris-udl-to-xml"
