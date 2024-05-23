@@ -1,3 +1,5 @@
+import pytest
+
 from udl2xml.main import convert
 
 
@@ -95,3 +97,87 @@ Owner2</Owner>
     xml = convert(udl)
     assert xml == expect, "Expected Owner element present"
 
+
+def test_language():
+    """Tests Language class keyword"""
+    
+    udl ="""
+Class Test.Language [ Language = objectscript ]
+{
+
+}
+""".lstrip()
+    expect = """
+<?xml version='1.0' encoding='UTF-8'?>
+<Export generator="IRIS" version="26">
+<Class name="Test.Language">
+<Language>objectscript</Language>
+</Class>
+</Export>
+""".lstrip()
+    
+    xml = convert(udl)
+    assert xml == expect, "Expected Owner element present"
+
+
+def test_extends():
+    """Basic test for Extends"""
+    
+    udl ="""
+Class Test.Persistent Extends %Persistent
+{
+
+}
+""".lstrip()
+    expect = """
+<?xml version='1.0' encoding='UTF-8'?>
+<Export generator="IRIS" version="26">
+<Class name="Test.Persistent">
+<Super>%Persistent</Super>
+</Class>
+</Export>
+""".lstrip()
+    
+    xml = convert(udl)
+    assert xml == expect, "Expected Owner element present"
+
+
+def test_malformed_before():
+    """Tests handling of unrecognized syntax"""
+    
+    udl ="""
+Something wrong
+Class Test.Malformed
+{
+}
+""".lstrip()
+    
+    with pytest.raises(ValueError, match="Parse error on line"):
+        convert(udl)
+
+
+def test_malformed_class_line():
+    """Tests handling of error in class declaration"""
+    
+    udl ="""
+Class Test.Malformed is wrong
+{
+}
+""".lstrip()
+    
+    with pytest.raises(ValueError, match="Parse error in class declaration"):
+        convert(udl)
+
+
+def test_trailing_data():
+    """Tests handling of data after class finished"""
+    
+    udl ="""
+Class Test.Malformed
+{
+}
+Something wrong
+""".lstrip()
+    
+    with pytest.raises(ValueError, match="Parse error: unexpected data"):
+        convert(udl)

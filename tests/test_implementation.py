@@ -1,5 +1,6 @@
 from io import StringIO
 
+import pytest
 from lxml import etree
 
 from udl2xml.implementation import get_implementation
@@ -39,6 +40,37 @@ Method Test()
     
     impl = get_implementation(stream, 'objectscript', 'test')
     assert impl == '\tSet a = /* What do you think? */ 42', "End of comment detected"
+
+
+def test_unknown_type():
+    """Tests handling of an unhandled implementation type"""
+    
+    udl = StringIO()
+    with pytest.raises(ValueError, match="Don't know how to parse"):
+        get_implementation(udl, 'unknown_type', None)
+
+
+def test_python_impl():
+    """Tests retrieving a Python method implementation"""
+    
+    frag = '''
+"""
+A string {
+"""
+for n in range(5):
+    pass # }
+\'''}\'''
+}
+'''.lstrip()
+    
+    expect = '"""\nA string {\n"""\nfor n in range(5):\n    pass # }\n\'\'\'}\'\'\''
+    
+    stream = StringIO(frag)
+    impl = get_implementation(stream, 'python', None)
+    assert impl == expect, "Implementation extracted properly"
+    
+    
+    
 
 
 # -----

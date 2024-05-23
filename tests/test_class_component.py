@@ -1,3 +1,5 @@
+import pytest
+
 from lxml import etree
 
 from udl2xml.main import convert
@@ -47,4 +49,19 @@ Class User.Test
     assert (el := cls.find('UDLText/Content')) is not None, 'UDLText element present'
     assert el.text == '\n/* abcde\n */\n', 'Comment content has correct value'
     assert '<![CDATA[' in etree.tostring(el).decode(), 'Comment content wrapped in CDATA section'
+
+
+def test_malformed():
+    """Tests handling of unrecognized syntax"""
+    
+    udl ="""
+Class Test.Malformed
+{
+Something wrong
+}
+""".lstrip()
+    
+    with pytest.raises(ValueError, match="Parse error: don't know how to handle"):
+        convert(udl)
+
 
