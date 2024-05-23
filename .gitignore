@@ -4,3 +4,6 @@ __pycache__
 .vscode
 /*.py
 /dist
+/.coverage
+/*.cmd
+/htmlcov
