@@ -147,57 +147,6 @@ def get_word(data:str, add:str='') -> str:
     return value
 
 
-def find_closing_brace(data:str) -> int:
-    """Returns the position of the closing brace in data"""
-    
-    i = 1
-    depth = 0
-    state = ''
-    while i < len(data):
-        c = data[i]
-        i += 1
-        if state == '':
-            if c == '{':
-                depth += 1
-            if c == '}':
-                if not depth:
-                    return i
-                depth -= 1
-            if c == '"':
-                state = 'inq'
-        elif state == 'inq':
-            if c == '"':
-                if i < len(data) and data[i] == '"':
-                    i += 1
-                else:
-                    state = ''
-    
-    raise ValueError(f"Error finding matching closing brace in {data}")
-
-
-def find_closing(data:str, char:str) -> int:
-    """Find closing char, ignoring anything in quotes"""
-    
-    i = 1
-    state = ''
-    while i < len(data):
-        c = data[i]
-        i += 1
-        if state == '':
-            if c == char:
-                return i
-            if c == '"':
-                state = 'inq'
-        elif state == 'inq':
-            if c == '"':
-                if i < len(data) and data[i] == '"':
-                    i += 1
-                else:
-                    state = ''
-    
-    raise ValueError(f"Error finding matching closing brace in {data}")
-
-
 def extract(data:str) -> str:
     """Extracts data delimited by ()/[]/{}
     
