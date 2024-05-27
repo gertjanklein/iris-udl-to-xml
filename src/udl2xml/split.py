@@ -62,8 +62,8 @@ def split_nv(data:str, strip_delim='') -> Generator[tuple[str, str], None, None]
         
         else:
             # Not a delimited value
-            if not (m := re.match(r'([\w./]+)\s*(,|$)', data)):
-                raise ValueError(f"Can't determine value in {data}")
+            if not (m := re.match(r'([\w\-+./]+)\s*(,|$)', data)):
+                raise ValueError(f"Can't determine value for {name} in {data}")
             value = m.group(1)
             data = data[m.end(2):].lstrip()
             

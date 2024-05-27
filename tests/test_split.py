@@ -23,3 +23,12 @@ def test_space_before_comma():
     assert res[1] == ('c', 'd'), "First parameter found"
 
 
+def test_negative_value():
+    """Tests that negative values are properly parsed"""
+    
+    udl = "(MAXLEN = -1)"
+    res = list(split_nv(udl))
+    
+    assert len(res) == 1, "Item found"
+    assert res[0] == ('MAXLEN', '-1'), "First parameter found"
+
